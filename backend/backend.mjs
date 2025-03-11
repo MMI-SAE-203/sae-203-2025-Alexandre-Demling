@@ -58,3 +58,15 @@ export async function dateFilm() {
                         export async function addNewActivite(newActivite) {
                             await pb.collection('activite').create(newActivite); 
                         }
+
+                        export async function UpdateInviteById(id, newMaison) {
+                            await pb.collection('invite').update(id, newMaison);
+                        }
+
+                        export async function UpdateFilmById(id, newMaison) {
+                            await pb.collection('film').update(id, newMaison);
+                        }
+
+                        export async function UpdateActiviteById(id, newMaison) {
+                            await pb.collection('activite').update(id, newMaison);
+                        }
