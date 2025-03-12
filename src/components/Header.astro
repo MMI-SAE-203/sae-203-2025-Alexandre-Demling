@@ -1,0 +1,80 @@
+---
+import { Image } from 'astro:assets';
+import Logo from '../assets/icons/icon_logo.svg';
+---
+
+<header class="fixed w-full bg-black/90 h-20 z-50">
+  <div class="container mx-auto h-full px-4 flex items-center justify-between">
+    <a href="/" class="flex items-center gap-3">
+      <Logo class="w-12 h-12" />
+      <span class="text-white text-xl font-medium">Ça va trail'er</span>
+    </a>
+    
+    <button
+      id="menu-btn"
+      class="group relative z-10 flex h-3 w-6 flex-col justify-between lg:hidden *:block *:ease *:h-0.5 *:w-full *:transform *:rounded-full *:bg-white *:transition *:duration-300"
+      aria-label="Menu"
+      aria-controls="menu"
+      aria-expanded="false"
+    >
+      <span class="group-aria-expanded:translate-y-[5px] group-aria-expanded:rotate-45"></span>
+      <span class="group-aria-expanded:-translate-y-[5px] group-aria-expanded:invisible"></span>
+      <span class="group-aria-expanded:-translate-y-[5px] group-aria-expanded:-rotate-45"></span>
+    </button>
+    
+    <nav
+      id="menu"
+      class="flex-1 fixed inset-0 z-0 bg-black/90 transition-all duration-300 lg:static lg:bg-transparent lg:ml-8"
+      aria-hidden="true"
+    >
+      <ul class="flex flex-col items-center justify-center h-screen gap-8 text-3xl lg:h-auto lg:flex-row lg:text-base lg:gap-8">
+        <li>
+          <a href="/festival" class="text-white hover:text-red-500 transition-colors">Le festival</a>
+        </li>
+        <li>
+          <a href="/invites" class="text-white hover:text-red-500 transition-colors">Invités</a>
+        </li>
+        <li>
+          <a href="/programme" class="text-white hover:text-red-500 transition-colors">Programme</a>
+        </li>
+        <li>
+          <a href="/films" class="text-white hover:text-red-500 transition-colors">Les films</a>
+        </li>
+        <li>
+          <a href="/a-propos" class="text-white hover:text-red-500 transition-colors">À propos</a>
+        </li>
+        <li>
+          <a href="/infos-pratiques" class="text-white hover:text-red-500 transition-colors">Infos pratiques</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  nav[aria-hidden="true"] {
+    @apply invisible opacity-0 lg:visible lg:opacity-100;
+  }
+  
+  nav:not([aria-hidden="true"]) {
+    @apply visible opacity-100;
+  }
+</style>
+
+<script>
+  const toggle = document.querySelector("#menu-btn");
+  const nav = document.querySelector("#menu");
+  const page = document.body;
+
+  if (toggle && nav) {
+    toggle.addEventListener("click", () => {
+      const isOpen = toggle.getAttribute("aria-expanded") === "true";
+      const isClosed = !isOpen;
+      
+      toggle.setAttribute("aria-expanded", String(isClosed));
+      nav.setAttribute("aria-hidden", String(isOpen));
+      page.classList.toggle("overflow-hidden", isClosed);
+    });
+  }
+</script>
+

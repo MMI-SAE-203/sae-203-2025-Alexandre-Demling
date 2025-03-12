@@ -147,7 +147,7 @@ try {
                     "Lieu_activite": "test",
                     "Description_activite": "mdrr jsp c un test",
                     "Date_activite": "2022-12-12",
-                    "Biographie_invite": " de la paix  laalalallaa",
+                    
                         }; 
                         await UpdateActiviteById("tkkt7e372083gkz", updateActivite);
                         }

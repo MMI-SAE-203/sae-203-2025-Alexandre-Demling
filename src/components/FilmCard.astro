@@ -1,0 +1,14 @@
+---
+const { film } = Astro.props;
+---
+
+<div class="film-card">
+    <img src={film.Affiche_film} alt={`Affiche de ${film.Titre_film}`} class="film-affiche" />
+    <h3>{film.Titre_film}</h3>
+    <p class="realisateur">Réalisation: {film.Realisation_film}</p>
+    <p class="annee">Année: {film.Anne_real_film}</p>
+    <p class="duree">Durée: {film.Duree_film}</p>
+    <p class="date">Projection: {new Date(film.Date_projection_film).toLocaleDateString('fr-FR')}</p>
+    <p class="salle">Salle: {film.Numero_salle}</p>
+    <a href={`/films/${film.id}`} class="btn-details">Voir les détails</a>
+</div>

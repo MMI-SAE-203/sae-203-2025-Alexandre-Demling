@@ -1,11 +1,45 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import MainLayout from '../layouts/MainLayout.astro';
+import FilmCard from '../components/FilmCard.astro';
+import InviteCard from '../components/InviteCard.astro';
+import { dateFilm, listeInvite } from '../lib/pocketbase';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// Récupérer les données meme que maquette
+const films = await dateFilm();
+const invites = await listeInvite();
+
+// Limiter à 3 films et 3 invités pour la page d'accueil normalement c prsk je trouvais ca moche avec tous les films :)
+const featuredFilms = films.slice(0, 3);
+const featuredInvites = invites.slice(0, 3);
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<MainLayout title="Festival de Cinéma - Accueil">
+    <section class="hero">
+        <h1>Bienvenue au Festival de Cinéma</h1>
+        <p>Découvrez notre sélection de films et nos invités prestigieux</p>
+    </section>
+    
+    <section class="featured">
+        <h2>Films à l'affiche</h2>
+        <div class="grid">
+            {featuredFilms.map(film => (
+                <FilmCard film={film} />
+            ))}
+        </div>
+        <div class="view-all">
+            <a href="/films" class="btn">Voir tous les films</a>
+        </div>
+    </section>
+    
+    <section class="featured">
+        <h2>Invités à l'honneur</h2>
+        <div class="grid">
+            {featuredInvites.map(invite => (
+                <InviteCard invite={invite} />
+            ))}
+        </div>
+        <div class="view-all">
+            <a href="/invites" class="btn">Voir tous les invités</a>
+        </div>
+    </section>
+</MainLayout>

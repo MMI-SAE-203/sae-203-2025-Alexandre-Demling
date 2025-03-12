@@ -1,0 +1,11 @@
+---
+const { invite } = Astro.props;
+---
+
+<div class="invite-card">
+    <img src={invite.Photo_invite} alt={`Photo de ${invite.Prenom_invite} ${invite.Nom_invite}`} class="invite-photo" />
+    <h3>{invite.Prenom_invite} {invite.Nom_invite}</h3>
+    <p class="role">{invite.Role_invite}</p>
+    <p class="bio">{invite.Biographie_invite.substring(0, 100)}...</p>
+    <a href={`/invites/${invite.id}`} class="btn-details">Voir le profil</a>
+</div>
