@@ -2,14 +2,8 @@
 import MainLayout from '../../layouts/MainLayout.astro';
 import { oneActivite, dateActivite, oneInvite } from '../../lib/pocketbase';
 
-export async function getStaticPaths() {
-  const activites = await dateActivite();
-  return activites.map(activite => ({
-    params: { id: activite.id },
-    props: { activite },
-  }));
-}
-const { activite } = Astro.props;
+const { id } = Astro.params;
+const activite = await oneActivite(id);
 let inviteAssocie = null;
 if (activite.invite_activite) {
   inviteAssocie = await oneInvite(activite.invite_activite);
