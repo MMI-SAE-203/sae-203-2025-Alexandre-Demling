@@ -1,11 +1,31 @@
 ---
-const { invite } = Astro.props;
+
+const { id, nom, prenom, role, photo, biographie } = Astro.props;
+const imageUrl = photo 
+  ? `http://127.0.0.1:8090/api/files/invite/${id}/${photo}`
+  : null;
+const shortBio = biographie && biographie.length > 150 
+  ? biographie.substring(0, 150) + '...' 
+  : biographie;
 ---
 
-<div class="invite-card">
-    <img src={invite.Photo_invite} alt={`Photo de ${invite.Prenom_invite} ${invite.Nom_invite}`} class="invite-photo" />
-    <h3>{invite.Prenom_invite} {invite.Nom_invite}</h3>
-    <p class="role">{invite.Role_invite}</p>
-    <p class="bio">{invite.Biographie_invite.substring(0, 100)}...</p>
-    <a href={`/invites/${invite.id}`} class="btn-details">Voir le profil</a>
+<div class="bg-white rounded-xl shadow-lg overflow-hidden h-full flex flex-col transition-transform hover:scale-[1.02] duration-300">
+  <div class="relative pt-[100%] bg-gray-100">
+    {imageUrl ? (
+      <img src={imageUrl || "/placeholder.svg"} alt={`${prenom} ${nom}`} class="absolute top-0 left-0 w-full h-full object-cover"/>
+    ) : (
+      <div class="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-gray-200">
+        <span class="text-4xl font-bold text-gray-400">
+          {prenom.charAt(0)}{nom.charAt(0)}
+        </span>
+      </div>
+    )}
+  </div>
+  
+  <div class="p-6 flex-grow flex flex-col">
+    <h3 class="text-xl font-bold text-[#B91C1C] mb-2">{prenom} {nom}</h3>
+    <p class="text-gray-600 mb-3">{role}</p>
+    <p class="text-gray-700 text-sm mb-4 flex-grow">{shortBio}</p>
+    <a href={`/invites/${id}`} class="mt-auto w-full px-4 py-2 bg-[#B91C1C] text-white rounded-full text-center hover:bg-red-800 transition-colors" > En savoir plus</a>
+  </div>
 </div>
