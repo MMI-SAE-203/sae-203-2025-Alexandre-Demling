@@ -9,42 +9,41 @@ import Logo from '../assets/icons/icon_logo.svg';
       <Logo class="w-12 h-12" />
       <span class="text-white text-xl font-medium">Ça va trail'er</span>
     </a>
-    
     <button
       id="menu-btn"
       class="group relative z-10 flex h-3 w-6 flex-col justify-between lg:hidden *:block *:ease *:h-0.5 *:w-full *:transform *:rounded-full *:bg-white *:transition *:duration-300"
       aria-label="Menu"
       aria-controls="menu"
-      aria-expanded="false"
-    >
+      aria-expanded="false">
       <span class="group-aria-expanded:translate-y-[5px] group-aria-expanded:rotate-45"></span>
       <span class="group-aria-expanded:-translate-y-[5px] group-aria-expanded:invisible"></span>
       <span class="group-aria-expanded:-translate-y-[5px] group-aria-expanded:-rotate-45"></span>
     </button>
-    
     <nav
       id="menu"
       class="flex-1 fixed inset-0 z-0 bg-black/90 transition-all duration-300 lg:static lg:bg-transparent lg:ml-8"
-      aria-hidden="true"
-    >
+      aria-hidden="true">
       <ul class="flex flex-col items-center justify-center h-screen gap-8 text-3xl lg:h-auto lg:flex-row lg:text-base lg:gap-8">
         <li>
-          <a href="/festival" class="text-white hover:text-red-500 transition-colors">Le festival</a>
+          <a href="/programme" class="text-white hover:text-red-500 transition-colors">Programme</a>
+        </li>
+        <li>
+          <a href="/films" class="text-white hover:text-red-500 transition-colors">Films</a>
         </li>
         <li>
           <a href="/invites" class="text-white hover:text-red-500 transition-colors">Invités</a>
         </li>
         <li>
-          <a href="/programme" class="text-white hover:text-red-500 transition-colors">Programme</a>
+          <a href="/activites" class="text-white hover:text-red-500 transition-colors">Activites</a>
         </li>
         <li>
-          <a href="/films" class="text-white hover:text-red-500 transition-colors">Les films</a>
+          <a href="/infos-pratiques" class="text-white hover:text-red-500 transition-colors">Infos pratiques</a>
         </li>
         <li>
           <a href="/a-propos" class="text-white hover:text-red-500 transition-colors">À propos</a>
         </li>
         <li>
-          <a href="/infos-pratiques" class="text-white hover:text-red-500 transition-colors">Infos pratiques</a>
+          <a href="/contact" class="text-white hover:text-red-500 transition-colors">Contact</a>
         </li>
       </ul>
     </nav>

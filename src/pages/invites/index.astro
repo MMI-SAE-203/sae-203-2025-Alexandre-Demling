@@ -1,0 +1,29 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import { listeInvite } from '../../lib/pocketbase';
+const invites = await listeInvite();
+---
+
+<MainLayout title="Invités - Ça va trail'er">
+    <div class="container mx-auto max-w-6xl px-4 py-24 mb-20">
+    <h1 class="text-6xl font-black mb-8" style="color: #B91C1C;">Les invités</h1>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {invites.map(invite => (
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+          {invite.Photo_invite ? (
+            <img src={`http://127.0.0.1:8090/api/files/invite/${invite.id}/${invite.Photo_invite}`} alt={`${invite.Prenom_invite} ${invite.Nom_invite}`}class="w-full h-64 object-cover"/> ) : (
+            <div class="w-full h-64 bg-gray-200 flex items-center justify-center">
+              <span class="text-gray-500">Photo non disponible</span>
+            </div>
+          )}
+          <div class="p-6">
+            <h2 class="text-2xl font-bold mb-4">
+              {invite.Prenom_invite} {invite.Nom_invite}
+            </h2>
+            <a  href={`/invites/${invite.id}`}  class="inline-block w-full py-2 bg-[#B91C1C] text-white text-center rounded-full hover:bg-red-800 transition-colors">Voir les détails</a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</MainLayout>

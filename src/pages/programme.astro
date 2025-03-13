@@ -1,0 +1,105 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import { Image } from 'astro:assets';
+import Bandeaux from '../assets/bandeaux_pages/bandeaux_programme.webp';
+import Dimanche from '../assets/programme/programme_dimanche.webp'
+import Lundi from '../assets/programme/programme_lundi.webp'
+import Mardi from '../assets/programme/programme_mardi.webp'
+import Mercredi from '../assets/programme/programme_mercredi.webp'
+import Jeudi from '../assets/programme/programme_jeudi.webp'
+import Vendredi from '../assets/programme/programme_vendredi.webp'
+import Samedi from '../assets/programme/programme_samedi.webp'
+---
+
+<MainLayout title="Programme - Ça va trail'er">
+  <div class="relative w-full h-[120vh] mb-12">
+    <Image src={Bandeaux || "/placeholder.svg"}alt="Programme du festival"class="w-full h-full object-cover"/>
+  </div>
+
+  <div class="container mx-auto max-w-6xl px-4 py-12">
+    <h1 class="text-6xl font-black mb-8" style="color: #B91C1C;">Programme</h1>
+    <div class="max-w-4xl mb-16">
+      <p class="text-xl leading-relaxed mb-8"> Découvrez la programmation complète de "Ça va trail'er" et plongez dans une semaine riche en films, rencontres et ateliers autour du trail running. Chaque jour, de nouvelles projections et événements vous attendent pour une immersion totale dans l'univers du sport et de la nature.</p>
+      <div class="text-center mb-16">
+        <p class="text-xl mb-6">Découvrez les films captivants du festival "Ça va trail'er" !</p>
+        <a href="/films" class="inline-block px-8 py-3 border-2 border-red-600 rounded-full font-bold hover:bg-red-600 hover:text-white transition-colors"> VOIR LES FILMS</a>
+      </div>
+    </div>
+    <div class="space-y-24">
+      <div class="flex flex-col md:flex-row items-center gap-8">
+        <div class="relative">
+          <Image src={Lundi || "/placeholder.svg"} alt="Lundi" class="" />
+        </div>
+        <div>
+          <h2 class="text-4xl font-black mb-4">Lundi 15 avril 2025</h2>
+          <p class="text-xl">Ouverture avec une projection spéciale et une rencontre avec Aurélien Dunand-Pallaz. Immersion totale dans l'univers du trail.</p>
+        </div>
+      </div>
+      <div class="flex flex-col md:flex-row-reverse items-center gap-8">
+        <div class="relative">
+          <Image src={Mardi || "/placeholder.svg"} alt="Mardi" class="" />
+        </div>
+        <div>
+          <h2 class="text-4xl font-black mb-4">Mardi 16 avril 2025</h2>
+          <p class="text-xl">Courts-métrages sur le dépassement de soi et les défis extrêmes, suivis d'une discussion avec les réalisateurs.</p>
+        </div>
+      </div>
+      <div class="flex flex-col md:flex-row items-center gap-8">
+        <div class="relative">
+          <Image src={Mercredi || "/placeholder.svg"} alt="Mercredi" class="" />
+        </div>
+        <div>
+          <h2 class="text-4xl font-black mb-4">Mercredi 17 avril 2025</h2>
+          <p class="text-xl">Journée dédiée aux films inspirés par la nature sauvage et les paysages extrêmes, en plein air avec écran LED.</p>
+        </div>
+      </div>
+
+      <div class="flex flex-col md:flex-row-reverse items-center gap-8">
+        <div class="relative">
+          <Image src={Jeudi || "/placeholder.svg"} alt="Jeudi" class="" />
+          
+        </div>
+        <div>
+          <h2 class="text-4xl font-black mb-4">Jeudi 18 avril 2025</h2>
+          <p class="text-xl">Expérience unique en réalité virtuelle, plongez dans un trail mythique comme si vous y étiez, suivi d'un débat.</p>
+        </div>
+      </div>
+      <div class="flex flex-col md:flex-row items-center gap-8">
+        <div class="relative">
+          <Image src={Vendredi || "/placeholder.svg"} alt="Vendredi" class="" />
+        </div>
+        <div>
+          <h2 class="text-4xl font-black mb-4">Vendredi 19 avril 2025</h2>
+          <p class="text-xl">Focus sur les documentaires, avec un échange entre athlètes et cinéastes sur la préparation mentale et physique.</p>
+        </div>
+      </div>
+      <div class="flex flex-col md:flex-row-reverse items-center gap-8">
+        <div class="relative">
+          <Image src={Samedi || "/placeholder.svg"} alt="Samedi" class="" />
+        </div>
+        <div>
+          <h2 class="text-4xl font-black mb-4">Samedi 20 avril 2025</h2>
+          <p class="text-xl">Soirée spéciale avec projection de films internationaux et table ronde sur l'avenir du trail running.</p>
+        </div>
+      </div>
+      <div class="flex flex-col md:flex-row items-center gap-8">
+        <div class="relative">
+          <Image src={Dimanche || "/placeholder.svg"} alt="Dimanche" class="" />
+        </div>
+        <div>
+          <h2 class="text-4xl font-black mb-4">Dimanche 21 avril 2025</h2>
+          <p class="text-xl">Clôture du festival avec la projection du court-métrage primé et une cérémonie célébrant les athlètes et réalisateurs.</p>
+        </div>
+      </div>
+    </div>
+    <div class="mt-32">
+      <h2 class="text-4xl font-black mb-8 text-center">Activités annexes</h2>
+      <ul class="text-xl space-y-4 max-w-4xl mx-auto">
+        <li>• Ateliers pratiques : Initiez-vous à la création de vidéos outdoor, au storytelling, ou à la prise de vues en pleine nature avec des professionnels.</li>
+        <li>• Expositions visuelles : Admirez des photographies et œuvres d'art mettant en scène la beauté des paysages et les défis du trail running.</li>
+        <li>• Animations familiales : Participez à des quizz sur le cinéma et le sport, des projections en plein air, et des activités pour les enfants.</li>
+      </ul>
+    </div>
+  </div>
+</MainLayout>
+

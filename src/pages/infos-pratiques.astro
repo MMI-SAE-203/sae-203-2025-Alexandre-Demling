@@ -1,0 +1,128 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import { Image } from 'astro:assets';
+import BandeauInfo from '../assets/bandeaux_pages/bandeaux_infos-pratiques.webp';
+import Fr from '../assets/lieux/infos-pratiques_carte-france.webp';
+import Parc from '../assets/lieux/infos-pratiques_carte-parc.webp';
+import IMG1 from '../assets/lieux/infos-pratiques_parc-img1.webp';
+import IMG2 from '../assets/lieux/infos-pratiques_parc-img2.webp';
+import IMG3 from '../assets/lieux/infos-pratiques_parc-img3.webp';
+---
+
+<MainLayout title="Infos pratiques - Ça va trail'er">
+  <div class="relative w-full h-[110vh] mb-12">
+    <Image src={BandeauInfo || "/placeholder.svg"} alt="Infos pratiques du festival" class="w-full h-full object-cover"/>
+  </div>
+
+  <div class="container mx-auto max-w-6xl px-4 mb-20">
+    <h1 class="text-6xl font-black mb-8" style="color: #B91C1C;">Infos pratiques</h1>
+    <p class="text-xl mb-8">Organisez votre venue au festival de Bavilliers ! Accès, hébergements, lieux et infos pratiques : tout ce qu'il faut pour profiter d'un événement 100 % gratuit.</p>
+    <div class="w-32 h-0.5 bg-gray-300 mx-auto mb-16"></div>
+    <div class="mb-16">
+      <h2 class="text-4xl font-black mb-6">Accessibilité pour tous</h2>
+      <p class="text-xl mb-2"> Entrée : 100 % gratuite</p>
+      <p class="text-xl mb-8">Pour participer, il vous suffit de remplir un formulaire d'inscription disponible sur notre site ou directement à l'entrée du festival.</p>
+    </div> 
+
+    <div class="mb-16">
+      <h2 class="text-4xl font-black mb-6">Un cadre naturel au parc de la Douce</h2>
+      <p class="text-xl mb-8">
+        Le festival "Ça va trail'er" se tiendra au parc de la Douce, un écrin de verdure à Belfort, offrant un cadre idéal pour célébrer le trail running en plein air, au plus près de la nature.
+      </p>
+
+      <div class="mb-8">
+        <Image src={Fr || "/placeholder.svg"}alt="Localisation de Belfort sur la carte de France"class="w-full max-w-2xl mx-auto"/>
+      </div>
+      <div class="mb-4">
+        <Image src={Parc || "/placeholder.svg"}alt="Carte du Parc de la Douce"class="w-full max-w-2xl mx-auto"/>
+      </div>
+      
+      <a href="https://www.google.com/maps/place/Parc+de+la+Douce/@47.6304056,6.8344706,17z/data=!3m1!4b1!4m6!3m5!1s0x47923c7d58b56a03:0x4685f1b0576de9c2!8m2!3d47.6304056!4d6.8344706!16s%2Fg%2F11b82724zz?entry=ttu&g_ep=EgoyMDI1MDMxMC4wIKXMDSoJLDEwMjExNDU1SAFQAw%3D%3D" class="text-xl text-red-600 hover:underline mb-8 block">Parc de la Douce, 90800 Bavilliers</a>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8 relative">
+        <Image src={IMG1 || "/placeholder.svg"}alt="Vue du Parc de la Douce 1"class="w-full h-80 object-cover"/>
+        <Image src={IMG2 || "/placeholder.svg"} alt="Vue du Parc de la Douce 2"class="w-full h-80 object-cover"/>
+        <Image src={IMG3 || "/placeholder.svg"} alt="Vue du Parc de la Douce 3" class="w-full h-80 object-cover"/>
+      </div>
+    </div>
+    <div class="mb-16 mt-20">
+      <h2 class="text-4xl font-black mb-6">Hébergement</h2>
+      
+      <p class="text-xl font-bold mb-4">Hôtels proches :</p>
+      <ul class="text-xl space-y-2 mb-6 list-disc pl-8">
+        <li>Brit Hotel Belfort Centre : à 30 minutes à pied, à partir de 50 €/nuit</li>
+        <li>Hotel Novotel Belfort Centre Atria : à 44 minutes en voiture, à partir de 70 €/nuit</li>
+      </ul>
+      
+      <p class="text-xl font-bold mb-4">Camping :</p>
+      <ul class="text-xl space-y-2 mb-6 list-disc pl-8">
+        <li>Camping de l'Étang des Forges - Nature et Familial</li>
+      </ul>
+      
+      <p class="text-xl font-bold mb-4">Autres options :</p>
+      <ul class="text-xl space-y-2 mb-8 list-disc pl-8">
+        <li>Airbnb et gîtes disponibles dans les environs.</li>
+      </ul>
+    </div>
+    
+    <div class="mb-16">
+      <h2 class="text-4xl font-black mb-6">Transport</h2>
+      
+      <p class="text-xl font-bold mb-4">Accès :</p>
+      <ul class="text-xl space-y-2 mb-6 list-disc pl-8">
+        <li>En train : Gare de Belfort, à 10 minutes en voiture de Bavilliers.</li>
+        <li>En voiture : Suivez la sortie "Bavilliers Centre" depuis l'A36.</li>
+        <li>Covoiturage : Consultez notre page dédiée au partage de trajets.</li>
+      </ul>
+      
+      <p class="text-xl font-bold mb-4">Parkings :</p>
+      <ul class="text-xl space-y-2 mb-8 list-disc pl-8">
+        <li>Parking Principal : Gratuit (200 places disponibles).</li>
+        <li>Parking Secondaire : Gratuit (150 places, à 5 min à pied).</li>
+      </ul>
+    </div>
+    
+    <div class="mb-16">
+      <h2 class="text-4xl font-black mb-6">FAQ</h2>
+      
+      <ol class="text-xl space-y-6 list-decimal pl-8">
+        <li>
+          <p class="font-bold">Comment s'inscrire au festival ?</p>
+          <p>Réservez vos billets gratuitement en ligne via notre billetterie. Une fois votre réservation effectuée, vous recevrez un billet avec un QR code par e-mail.</p>
+        </li>
+        <li>
+          <p class="font-bold">Le festival est-il vraiment gratuit ?</p>
+          <p>Oui, l'entrée est 100 % gratuite. Il suffit de réserver votre billet en ligne via notre billetterie.</p>
+        </li>
+        <li>
+          <p class="font-bold">Y a-t-il des activités pour les enfants ?</p>
+          <p>Oui, des ateliers et animations spécialement conçus pour les enfants seront organisés.</p>
+        </li>
+        <li>
+          <p class="font-bold">Puis-je venir sans billet ?</p>
+          <p>Oui, mais nous recommandons de vous inscrire à l'avance pour garantir votre accès aux ateliers et projections.</p>
+        </li>
+        <li>
+          <p class="font-bold">Les animaux sont-ils autorisés ?</p>
+          <p>Seuls les animaux d'assistance sont autorisés.</p>
+        </li>
+        <li>
+          <p class="font-bold">Où peut-on manger sur place ?</p>
+          <p>Des stands de restauration rapide et un espace pique-nique seront disponibles sur le site.</p>
+        </li>
+        <li>
+          <p class="font-bold">Y a-t-il des offres spéciales pour les groupes ?</p>
+          <p>Oui, un Billet Groupe est disponible pour 3 à 5 personnes, parfait pour les familles ou amis.</p>
+        </li>
+        <li>
+          <p class="font-bold">Que faire si je ne peux pas venir après avoir réservé ?</p>
+          <p>Pas de souci ! Informez-nous via l'e-mail de confirmation pour libérer votre place.</p>
+        </li>
+        <li>
+          <p class="font-bold">Y a-t-il des parkings à proximité ?</p>
+          <p>Oui, plusieurs parkings gratuits sont disponibles à quelques minutes à pied des lieux principaux du festival.</p>
+        </li>
+      </ol>
+    </div>
+  </div>
+</MainLayout>

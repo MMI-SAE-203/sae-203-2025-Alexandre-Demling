@@ -1,0 +1,98 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import { Image } from 'astro:assets';
+import Face from '../assets/icons/icon_facebook-noir.svg';
+import Insta from '../assets/icons/icon_insta-noir.svg';
+import Tik from '../assets/icons/icon_tiktok-noir.svg';
+---
+
+<MainLayout title="Contact - Ça va trail'er">
+  <div class="container mx-auto max-w-6xl px-4 py-24 mb-20">
+    <h1 class="text-6xl font-black mb-8" style="color: #B91C1C;">Contact</h1>
+    <p class="text-xl mb-8">Vous avez des questions sur le festival ? N'hésitez pas à nous contacter, nous serons ravis de vous répondre.</p>
+    <div class="w-32 h-0.5 bg-gray-300 mx-auto mb-16"></div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+      <div class="md:col-span-1">
+        <div class="bg-white rounded-lg shadow-md p-8">
+          <h2 class="text-3xl font-bold mb-8">Coordonnées</h2>
+          <div class="space-y-8">
+            <div>
+              <h3 class="text-xl font-semibold mb-2">Adresse</h3>
+              <p class="text-lg">123 Avenue du Trail</p>
+              <p class="text-lg">90800 Bavilliers</p>
+            </div>
+            <!-- pas oublie de mettre autre email et num-->
+            <div>
+              <h3 class="text-xl font-semibold mb-2">Email</h3>
+              <a href="mailto:contact@cavatreiler.fr" class="text-lg text-[#B91C1C] hover:underline"> cavatrailer@festival.com</a>
+            </div>
+            <div>
+              <h3 class="text-xl font-semibold mb-2">Téléphone</h3>
+              <a href="tel:0123456789" class="text-lg text-[#B91C1C] hover:underline">01 23 45 67 89</a>
+            </div>
+            <div>
+              <h3 class="text-xl font-semibold mb-2">Réseaux sociaux</h3>
+              <div class="flex space-x-6 mt-4">
+                <a href="https://facebook.com" target="_blank" class="hover:opacity-70 transition-opacity"><Image src={Face || "/placeholder.svg"} alt="Facebook" width={30} height={30} /></a>
+                <a href="https://instagram.com" target="_blank" class="hover:opacity-70 transition-opacity"><Image src={Insta || "/placeholder.svg"} alt="Instagram" width={30} height={30} /></a>
+                <a href="https://tiktok.com" target="_blank" class="hover:opacity-70 transition-opacity"><Image src={Tik || "/placeholder.svg"} alt="TikTok" width={30} height={30} /></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="md:col-span-2">
+        <div class="bg-white rounded-lg shadow-md p-8">
+          <h2 class="text-3xl font-bold mb-8">Envoyez-nous un message</h2>
+          <form id="contactForm" class="space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label for="name" class="block text-lg font-medium text-gray-700 mb-2">Nom</label>
+                <input type="text" id="name"  name="name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-[#B91C1C] focus:border-[#B91C1C]"required >
+              </div>
+              <div>
+                <label for="email" class="block text-lg font-medium text-gray-700 mb-2">Email</label>
+                <input  type="email"  id="email"  name="email"  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-[#B91C1C] focus:border-[#B91C1C]" required>
+              </div>
+            </div>
+            <div>
+              <label for="subject" class="block text-lg font-medium text-gray-700 mb-2">Sujet</label>
+              <input type="text" id="subject" name="subject" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-[#B91C1C] focus:border-[#B91C1C]"required>
+            </div>
+            <div>
+              <label for="message" class="block text-lg font-medium text-gray-700 mb-2">Message</label>
+              <textarea 
+                id="message" 
+                name="message" 
+                rows="6" 
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-[#B91C1C] focus:border-[#B91C1C]"
+                required
+              ></textarea>
+            </div>
+            <div class="text-center">
+              <button type="submit" class="inline-block px-8 py-3 bg-[#B91C1C] text-white rounded-full hover:bg-red-800 transition-colors">
+                Envoyer le message
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</MainLayout>
+
+<!-- faut envoye succes mais faire semblant  -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('contactForm');
+    
+    if (form) {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        alert('Votre message a été envoyé avec succès !');
+        form.reset();
+      });
+    }
+  });
+</script>

@@ -3,43 +3,119 @@ import MainLayout from '../layouts/MainLayout.astro';
 import FilmCard from '../components/FilmCard.astro';
 import InviteCard from '../components/InviteCard.astro';
 import { dateFilm, listeInvite } from '../lib/pocketbase';
-
-// Récupérer les données meme que maquette
+import Bandeau from '../assets/icons/bandeaux_accueil.webp';
+import { Image } from 'astro:assets';
+import Arte from '../assets/partenaire/accueil_arte.webp';
+import Salomon from '../assets/partenaire/accueil_salomon.webp';
+import Canon from '../assets/partenaire/accueil_canon.webp';
+import Credit from '../assets/partenaire/accueil_credit-agricole.webp';
+import France3 from '../assets/partenaire/accueil_france3.webp';
+import Rcf from '../assets/partenaire/accueil_rcf-radio.webp';
+import Wwf from '../assets/partenaire/accueil_wwf.webp';
 const films = await dateFilm();
 const invites = await listeInvite();
-
-// Limiter à 3 films et 3 invités pour la page d'accueil normalement c prsk je trouvais ca moche avec tous les films :)
 const featuredFilms = films.slice(0, 3);
 const featuredInvites = invites.slice(0, 3);
 ---
 
-<MainLayout title="Festival de Cinéma - Accueil">
-    <section class="hero">
-        <h1>Bienvenue au Festival de Cinéma</h1>
-        <p>Découvrez notre sélection de films et nos invités prestigieux</p>
-    </section>
+<MainLayout title="Ça va trail'er - Festival de Trail Running et Cinéma">
+  <section class="relative h-screen">
+    <div class="absolute inset-0">
+      <Image src={Bandeau || "/placeholder.svg"}alt="Montagnes" class="w-full h-full object-cover"/>
+      <div class="absolute inset-0 bg-black/50"></div>
+    </div>
     
-    <section class="featured">
-        <h2>Films à l'affiche</h2>
-        <div class="grid">
-            {featuredFilms.map(film => (
-                <FilmCard film={film} />
-            ))}
-        </div>
-        <div class="view-all">
-            <a href="/films" class="btn">Voir tous les films</a>
-        </div>
-    </section>
-    
-    <section class="featured">
-        <h2>Invités à l'honneur</h2>
-        <div class="grid">
-            {featuredInvites.map(invite => (
-                <InviteCard invite={invite} />
-            ))}
-        </div>
-        <div class="view-all">
-            <a href="/invites" class="btn">Voir tous les invités</a>
-        </div>
-    </section>
+    <div class="relative z-10 container mx-auto px-4 h-full flex flex-col justify-center items-center text-center text-white">
+      <h1 class="text-6xl md:text-8xl font-black mb-8">Ça va Trail'er</h1>
+      <h2 class="text-2xl md:text-4xl font-bold mb-8">La prochaine édition de "Ça va trailer" ce déroulera du 15 au 21 avril 2025</h2>
+      <a href="/billeterie" class="inline-block px-8 py-4 text-xl font-bold border-2 border-red-600 rounded-full hover:bg-red-600 transition-colors">RÉSERVER VOTRE PLACE</a>
+    </div>
+  </section>
+  <!-- Mettre au cas ou description du festival ultra long  -->
+  <section class="py-20 px-4">
+    <div class="container mx-auto max-w-4xl text-center">
+      <p class="text-xl leading-relaxed"> Le festival "Ça va trail'er", situé à Belfort du 15 au 21 avril 2025, célèbre le trail running à travers des projections de films inspirants et des rencontres avec les cinéastes et les athlètes. Ce rendez-vous unique offre une immersion au cœur de ce sport exigeant, mettant en avant les défis, la nature sauvage et la détermination des athlètes à travers des récits captivants.</p>
+    </div>
+  </section>
+  <section class="py-20 px-4 bg-white">
+    <div class="container mx-auto max-w-4xl">
+      <h2 class="text-4xl font-black mb-6">Programme</h2>
+      <p class="text-xl mb-8">La programmation de "Ça va trail'er" offre une sélection de films immersifs, courts métrages et trailers réalisés par de nouveaux artistes en collaboration avec des athlètes, mettant en lumière l'énergie et la passion du trail running. </p>
+      <a href="/programme" class="inline-block px-8 py-3 border-2 border-red-600 rounded-full font-bold hover:bg-red-600 hover:text-white transition-colors">PROGRAMME</a>
+    </div>
+  </section>
+  
+  <section class="py-20 px-4">
+    <div class="container mx-auto max-w-4xl">
+      <h2 class="text-4xl font-black mb-6">Films</h2>
+      <p class="text-xl mb-8">Découvrez notre sélection de films exceptionnels dédiés au trail running. Des documentaires inspirants aux récits d'aventures épiques, plongez dans l'univers fascinant de ce sport à travers le regard de cinéastes passionnés.</p>
+      <a href="/films" class="inline-block px-8 py-3 border-2 border-red-600 rounded-full font-bold hover:bg-red-600 hover:text-white transition-colors">FILMS</a>
+    </div>
+  </section>
+  
+  <section class="py-20 px-4 bg-white">
+    <div class="container mx-auto max-w-4xl">
+      <h2 class="text-4xl font-black mb-6">Invité</h2>
+      <p class="text-xl mb-8"> Des invités d'exception au rendez-vous ! Rencontrez des artistes, réalisateurs et intervenants passionnants qui feront de ce festival une expérience unique et inoubliable.</p>
+      <a href="/invites" class="inline-block px-8 py-3 border-2 border-red-600 rounded-full font-bold hover:bg-red-600 hover:text-white transition-colors">INVITÉ</a>
+    </div>
+  </section>
+  <section class="py-20 px-4">
+    <div class="container mx-auto max-w-4xl">
+      <h2 class="text-4xl font-black mb-6">Billeterie</h2>
+      <p class="text-xl mb-8">
+        Réservez vos billets pour "Ça va trail'er" et vivez une expérience unique autour du trail running à Belfort, du 15 au 21 avril 2025 !
+      </p>
+      <a href="/billeterie" class="inline-block px-8 py-3 border-2 border-red-600 rounded-full font-bold hover:bg-red-600 hover:text-white transition-colors">
+        BILLETERIE
+      </a>
+    </div>
+  </section>
+  <section class="py-20 px-4 bg-white">
+    <div class="container mx-auto max-w-4xl">
+      <h2 class="text-4xl font-black mb-6">Infos pratiques</h2>
+      <p class="text-xl mb-8"> Préparez votre venue au festival ! Découvrez toutes les informations essentielles pour organiser votre expérience : accès, hébergements, lieux et billetterie.</p>
+      <a href="/infos-pratiques" class="inline-block px-8 py-3 border-2 border-red-600 rounded-full font-bold hover:bg-red-600 hover:text-white transition-colors">INFOS PRATIQUES</a>
+    </div>
+  </section>
+  
+  <section class="py-20 px-4">
+    <div class="container mx-auto max-w-4xl">
+      <h2 class="text-4xl font-black mb-6">Activités</h2>
+      <p class="text-xl mb-8">Participez à nos nombreuses activités autour du trail running ! Ateliers, conférences, séances de dédicaces et courses d'initiation vous attendent pour une immersion complète dans l'univers du trail.</p>
+      <a href="/activites" class="inline-block px-8 py-3 border-2 border-red-600 rounded-full font-bold hover:bg-red-600 hover:text-white transition-colors">ACTIVITÉS</a>
+    </div>
+  </section>
+  
+  <section class="py-20 px-4 bg-white">
+    <div class="container mx-auto max-w-4xl">
+      <h2 class="text-4xl font-black mb-6">Contact</h2>
+      <p class="text-xl mb-8">Une question sur le festival ? Besoin d'informations supplémentaires ? Notre équipe est à votre disposition pour vous aider à préparer votre venue et répondre à toutes vos interrogations.</p>
+      <a href="/contact" class="inline-block px-8 py-3 border-2 border-red-600 rounded-full font-bold hover:bg-red-600 hover:text-white transition-colors">CONTACT</a>
+    </div>
+  </section>
+  
+  <section class="py-20 px-4">
+    <div class="container mx-auto max-w-4xl">
+      <h2 class="text-4xl font-black mb-6">À propos</h2>
+      <p class="text-xl mb-8">Découvrez l'histoire du festival "Ça va trail'er", sa mission et les valeurs qui nous animent. Un événement né de la passion pour le trail running et le cinéma, créé par des amoureux de la montagne et de l'aventure.</p>
+      <a href="/a-propos" class="inline-block px-8 py-3 border-2 border-red-600 rounded-full font-bold hover:bg-red-600 hover:text-white transition-colors">À PROPOS</a>
+    </div>
+  </section>
+  
+  <!-- Partenaires image mais en ligne c plus jolie  -->
+  <section class="py-20 px-4 bg-white">
+    <div class="container mx-auto max-w-6xl">
+      <h2 class="text-4xl font-black mb-16">NOS PARTENAIRES</h2>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12 items-center justify-items-center">
+        <Image src={Arte || "/placeholder.svg"} alt="Arte" class="w-48" />
+        <Image src={Rcf || "/placeholder.svg"} alt="RCF Radio" class="w-48" />
+        <Image src={France3 || "/placeholder.svg"} alt="France3" class="w-48" />
+        <Image src={Canon || "/placeholder.svg"} alt="Canon" class="w-48" />
+        <Image src={Credit || "/placeholder.svg"} alt="Crédit Agricole" class="w-48" />
+        <Image src={Wwf || "/placeholder.svg"} alt="WWF" class="w-48" />
+        <Image src={Salomon || "/placeholder.svg"} alt="Salomon" class="w-48" />
+      </div>
+    </div>
+  </section>
 </MainLayout>

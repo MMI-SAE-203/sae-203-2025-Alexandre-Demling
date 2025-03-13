@@ -1,0 +1,88 @@
+---
+import MainLayout from '../../../layouts/MainLayout.astro';
+import { dateFilm } from '../../../lib/pocketbase';
+export async function getStaticPaths() {
+  const films = await dateFilm();
+  const langues = [...new Set(films.map(film => film.Langue_film))];
+  return langues.map(langue => ({
+    params: { langue },
+    props: { langue },
+  }));
+}
+const { langue } = Astro.props;
+const allFilms = await dateFilm();
+const filteredFilms = allFilms.filter(film => film.Langue_film === langue);
+const langues = [...new Set(allFilms.map(film => film.Langue_film))];
+---
+
+<MainLayout title={`Films en ${langue} - Ça va trail'er`}>
+  <div class="container mx-auto max-w-6xl px-4 py-24 mb-20">
+    <h1 class="text-6xl font-black mb-8" style="color: #B91C1C;">Films en {langue}</h1>
+    <p class="text-xl mb-8">Découvrez notre sélection de films en {langue}.</p>
+    <div class="w-32 h-0.5 bg-gray-300 mx-auto mb-16"></div>
+    <div class="mb-12 text-center">
+      <h3 class="text-2xl font-bold mb-4">Filtrer par langue</h3>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="/films" class="px-6 py-2 rounded-full border-2 border-[#B91C1C] text-[#B91C1C] hover:bg-[#B91C1C] hover:text-white transition-colors">Tous les films</a>
+        {langues.map(lang => (
+          <a href={`/films/langue/${lang}`} class={`px-6 py-2 rounded-full ${lang === langue ? 'bg-[#B91C1C] text-white' : 'border-2 border-[#B91C1C] text-[#B91C1C]'} hover:bg-[#B91C1C] hover:text-white transition-colors`}>{lang}</a>
+        ))}
+      </div>
+    </div>
+    <h2 class="text-5xl font-black text-center mb-12">Liste des films en {langue}</h2>
+    {filteredFilms.length === 0 ? (
+      <div class="text-center py-12">
+        <p class="text-2xl">Aucun film disponible en {langue}.</p>
+      </div>
+    ) : (
+      <div class="grid grid-cols-1 gap-16">
+        {filteredFilms.map((film) => {
+          try {
+            const dateObj = new Date(film.Date_projection_film);
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const formattedDate = dateObj.toLocaleDateString('fr-FR', options);
+            const hours = dateObj.getHours().toString().padStart(2, '0');
+            const minutes = dateObj.getMinutes().toString().padStart(2, '0');
+            const formattedTime = `${hours}h${minutes === '00' ? '00' : minutes}`;
+            return (
+              <div class="film-card mb-16">
+                <div class="flex flex-col md:flex-row gap-8">
+                  <div class="w-full md:w-1/4">
+                    {film.Affiche_film && ( <img src={`http://127.0.0.1:8090/api/files/film/${film.id}/${film.Affiche_film}`} alt={`Affiche du film ${film.Titre_film}`}class="w-full h-auto object-cover"/>)}
+                    {!film.Affiche_film && (
+                      <div class="bg-gray-200 w-full h-80 flex items-center justify-center">
+                        <span class="text-gray-500">Affiche non disponible</span>
+                      </div>
+                    )}
+                  </div>
+                  <div class="w-full md:w-3/4">
+                    <div class="mb-4">
+                      {film.Realisation_film && (<p class="text-lg">Réalisation : {film.Realisation_film}</p>)}
+                      {film.liste_acteur_film && (<p class="text-lg">Athlète : {film.liste_acteur_film}</p>)}
+                    </div>
+                    <div class="date-info mb-6">
+                      <p class="text-2xl font-bold">{formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1)}</p>
+                      <p class="text-6xl font-black">{formattedTime}</p>
+                      <p class="text-3xl font-bold mt-2">Salle {film.Numero_salle}</p>
+                    </div>
+                    <div class="film-title-info text-center my-8">
+                      <h3 class="text-3xl font-bold uppercase">{film.Titre_film}</h3>
+                      {film.Duree_film && ( <p set:html={film.Duree_film} />)}
+                      <p class="text-lg mt-2">({film.Anne_real_film}, <span class="font-semibold">{film.Langue_film}</span>) </p>
+                    </div>
+                    <div class="text-center mt-6">
+                      <a href={`/films/${film.id}`} class="inline-block px-8 py-3 border-2 border-[#B91C1C] text-[#B91C1C] rounded-full hover:bg-[#B91C1C] hover:text-white transition-colors"> En savoir plus sur "{film.Titre_film.toUpperCase()}"</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          } catch (error) {
+            console.error("Erreur ça marcge pas:", error);
+            return null; 
+          }
+        })}
+      </div>
+    )}
+  </div>
+</MainLayout>

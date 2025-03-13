@@ -1,0 +1,91 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import { oneFilm, dateFilm, oneInvite } from '../../lib/pocketbase';
+export async function getStaticPaths() {
+  const films = await dateFilm();
+  return films.map(film => ({
+    params: { id: film.id },
+    props: { film },
+  }));
+}
+const { film } = Astro.props;
+let inviteAssocie = null;
+if (film.invite_associe) {
+  inviteAssocie = await oneInvite(film.invite_associe);
+}
+const dateObj = new Date(film.Date_projection_film);
+const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+const formattedDate = dateObj.toLocaleDateString('fr-FR', options);
+const hours = dateObj.getHours().toString().padStart(2, '0');
+const minutes = dateObj.getMinutes().toString().padStart(2, '0');
+const formattedTime = `${hours}h${minutes === '00' ? '00' : minutes}`;
+---
+
+<MainLayout title={`${film.Titre_film} - Ça va trail'er`}>
+    
+    <div class="container mx-auto max-w-6xl px-4 py-24 mb-20">
+        <h1 class="text-6xl font-black mb-8" style="color: #B91C1C;">{film.Titre_film}</h1>
+    <p class="text-xl mb-8">Un voyage cinématographique au cœur des défis du trail running.</p>
+    <div class="w-32 h-0.5 bg-gray-300 mx-auto mb-16"></div>
+    <div class="text-center mb-12">
+      <p class="text-4xl font-black mb-4">{formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1)}</p>
+      <p class="text-7xl font-black mb-4">{formattedTime}</p>
+      <p class="text-4xl font-bold">Salle {film.Numero_salle}</p>
+    </div>
+    <div class="mb-12">
+      <p class="text-2xl mb-6">Réalisation : {film.Realisation_film}</p>
+      <div class="w-full max-w-2xl mx-auto mb-8">
+        {film.Affiche_film ? (
+          <img src={`http://127.0.0.1:8090/api/files/film/${film.id}/${film.Affiche_film}`} alt={`Affiche du film ${film.Titre_film}`} class="w-full h-auto object-cover border-4 border-[#B91C1C]"/>
+        ) : (
+          <div class="bg-gray-200 w-full h-96 flex items-center justify-center">
+            <span class="text-gray-500">Affiche non disponible</span>
+          </div>
+        )}
+      </div>
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-black uppercase mb-2">{film.Titre_film}</h2>
+        <p set:html={film.Duree_film}></p>
+        <p class="text-xl">({film.Langue_film})</p>
+      </div>
+      {inviteAssocie && (
+        <div class="bg-gray-50 p-8 rounded-lg mb-16 text-center">
+          <h2 class="text-3xl font-bold mb-4">Invité spécial</h2>
+          <p class="text-2xl mb-4">{inviteAssocie.Prenom_invite} {inviteAssocie.Nom_invite}</p>
+          <a  href={`/invites/${inviteAssocie.id}`}  class="inline-block px-8 py-3 bg-[#B91C1C] text-white rounded-full hover:bg-red-800 transition-colors"> Découvrir {inviteAssocie.Prenom_invite} {inviteAssocie.Nom_invite}</a>
+        </div>
+      )}
+      <div class="prose max-w-none mb-16">
+        <p class="text-xl leading-relaxed">{film.Synopsis_film}</p>
+      </div>
+<!-- Video marche pas voir plus tard -->
+      {film.Bande_annonce_film && (
+        <div class="aspect-w-16 aspect-h-9 mb-16">
+          <iframe src={film.Bande_annonce_film}allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"allowfullscreen class="w-full h-[600px]"></iframe>
+        </div>
+      )}
+<!-- a propos du réal mais jai marque sur le pocketbase realisation mais pg si jamais je te le rappel -->
+      <div class="mb-16">
+        <h2 class="text-4xl font-black mb-6">À propos du réalisateur : {film.Realisation_film}</h2>
+        <p class="text-xl leading-relaxed mb-8">{film.a_propos_du_real}</p>
+      </div>
+      <div class="bg-gray-100 p-8 rounded-lg mb-16">
+        <h2 class="text-2xl font-bold mb-4">Plus d'informations:</h2>
+        <ul class="space-y-2">
+          <li><strong>Année de réalisation :</strong> {film.Anne_real_film}</li>
+          <li><strong>Durée du film :</strong></li> <p set:html={film.Duree_film}></p>
+          <li><strong>Langue :</strong> {film.Langue_film}</li>
+          {film.liste_acteur_film && (
+            <li><strong>Avec :</strong> {film.liste_acteur_film}</li>
+          )}
+        </ul>
+      </div>
+      <div class="text-center mt-8 mb-8">
+        <a href={`/admin/edit/film/${film.id}`} class="inline-block px-8 py-3 bg-[#B91C1C] text-white rounded-full hover:bg-red-800 transition-colors"> Modifier ce film</a>
+      </div>
+      <div class="text-center">
+        <a href="/films" class="inline-block px-8 py-3 bg-[#B91C1C] text-white rounded-full hover:bg-red-800 transition-colors"> Retour à la liste des films</a>
+      </div>
+    </div>
+  </div>
+</MainLayout>

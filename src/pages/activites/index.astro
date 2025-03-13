@@ -1,0 +1,41 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import { dateActivite } from '../../lib/pocketbase';
+
+const activites = await dateActivite();
+---
+
+<!--Récupération activités par date chrono ask dans pour le back -->
+
+<MainLayout title="Activités - Ça va trail'er">
+  <div class="container mx-auto max-w-6xl px-4 py-24 mb-20">
+    <h1 class="text-6xl font-black mb-8" style="color: #B91C1C;">Activités</h1>
+    <p class="text-xl mb-8"> Découvrez toutes les activités proposées pendant le festival, des projections aux rencontres avec les invités.</p>
+    <div class="w-32 h-0.5 bg-gray-300 mx-auto mb-16"></div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {activites.map((activite) => {
+        const dateObj = new Date(activite.Date_activite);
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        const formattedDate = dateObj.toLocaleDateString('fr-FR', options);
+        const hours = dateObj.getHours().toString().padStart(2, '0');
+        const minutes = dateObj.getMinutes().toString().padStart(2, '0');
+        const formattedTime = `${hours}h${minutes === '00' ? '00' : minutes}`;
+        return (
+          <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+            <div class="p-6">
+              <div class="mb-4">
+                <span class="text-4xl font-bold mb-8 text-center">{activite.Type_activite} </span>
+                <p class="text-sm text-gray-600">{formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1)} à {formattedTime} </p>
+              </div>
+              <h3 class="text-2xl font-bold mb-4">{activite.Titre_activite}</h3>
+              <p class="text-lg mb-6">{activite.Description_activite}</p>
+              <div class="text-center mt-4">
+                <a href={`/activites/${activite.id}`} class="inline-block w-full py-2 bg-[#B91C1C] text-white text-center rounded-full hover:bg-red-800 transition-colors" > Voir les détails</a>
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</MainLayout>
