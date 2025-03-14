@@ -31,7 +31,7 @@ const formattedTime = `${hours}h${minutes === '00' ? '00' : minutes}`;
       <p class="text-2xl mb-6">Réalisation : {film.Realisation_film}</p>
       <div class="w-full max-w-2xl mx-auto mb-8">
         {film.Affiche_film ? (
-          <img src={`http://127.0.0.1:8090/api/files/film/${film.id}/${film.Affiche_film}`} alt={`Affiche du film ${film.Titre_film}`} class="w-full h-auto object-cover border-4 border-[#B91C1C]"/>
+          <img src={`https://sae203.alexandre-demling.fr/api/files/film/${film.id}/${film.Affiche_film}`} alt={`Affiche du film ${film.Titre_film}`} class="w-full h-auto object-cover border-4 border-[#B91C1C]"/>
         ) : (
           <div class="bg-gray-200 w-full h-96 flex items-center justify-center">
             <span class="text-gray-500">Affiche non disponible</span>

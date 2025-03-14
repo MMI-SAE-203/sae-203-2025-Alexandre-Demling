@@ -1,15 +1,10 @@
 ---
 import MainLayout from '../../../layouts/MainLayout.astro';
 import { dateFilm } from '../../../lib/pocketbase';
-export async function getStaticPaths() {
-  const films = await dateFilm();
-  const langues = [...new Set(films.map(film => film.Langue_film))];
-  return langues.map(langue => ({
-    params: { langue },
-    props: { langue },
-  }));
-}
-const { langue } = Astro.props;
+
+
+
+const { langue } = Astro.params;
 const allFilms = await dateFilm();
 const filteredFilms = allFilms.filter(film => film.Langue_film === langue);
 const langues = [...new Set(allFilms.map(film => film.Langue_film))];

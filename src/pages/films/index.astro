@@ -36,7 +36,7 @@ const langues = [...new Set(films.map(film => film.Langue_film))];
             <div class="flex flex-col md:flex-row gap-8">
               <div class="w-full md:w-1/4">
                 {film.Affiche_film ? (
-                  <img src={`http://127.0.0.1:8090/api/files/film/${film.id}/${film.Affiche_film}`} alt={`Affiche du film ${film.Titre_film}`}class="w-full h-auto object-cover"/>) : (
+                  <img src={`https://sae203.alexandre-demling.fr/api/files/film/${film.id}/${film.Affiche_film}`} alt={`Affiche du film ${film.Titre_film}`}class="w-full h-auto object-cover"/>) : (
                   <div class="bg-gray-200 w-full h-80 flex items-center justify-center">
                     <span class="text-gray-500">Affiche non disponible</span>
                   </div>
