@@ -54,11 +54,12 @@ const formattedTime = `${hours}h${minutes === '00' ? '00' : minutes}`;
         <p class="text-xl leading-relaxed">{film.Synopsis_film}</p>
       </div>
 <!-- Video marche pas voir plus tard -->
-      {film.Bande_annonce_film && (
-        <div class="aspect-w-16 aspect-h-9 mb-16">
-          <iframe src={film.Bande_annonce_film}allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"allowfullscreen class="w-full h-[600px]"></iframe>
-        </div>
-      )}
+{film.Bande_annonce_film && (
+  <div class="mb-16">
+    <p class="text-lg">Lien de la bande-annonce: </p>
+    <a href={film.Bande_annonce_film} target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline break-all">{film.Bande_annonce_film} </a>
+  </div>
+)}
 <!-- a propos du réal mais jai marque sur le pocketbase realisation mais pg si jamais je te le rappel -->
       <div class="mb-16">
         <h2 class="text-4xl font-black mb-6">À propos du réalisateur : {film.Realisation_film}</h2>
