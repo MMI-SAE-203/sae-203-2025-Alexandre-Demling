@@ -1,5 +1,5 @@
 import PocketBase from 'pocketbase';
-const pb = new PocketBase('https://sae203.alexandre-demling.fr/');
+const pb = new PocketBase('https://sae203.alexandre-demling.fr:443');
 
 export async function dateFilm() {
     const records = await pb.collection('film').getFullList({ sort: 'Date_projection_film', });
